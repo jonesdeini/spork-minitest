@@ -1,9 +1,9 @@
 class Spork::TestFramework::MiniTest < Spork::TestFramework
   DEFAULT_PORT = 8988
-  HELPER_FILE = File.join(Dir.pwd, "test/test_helper.rb")
+  HELPER_FILE = File.join(Dir.pwd, "test/minitest_helper.rb")
 
   def run_tests(argv, stderr, stdout)
-    require "minitest/unit"
+    require "minitest/spec"
     $LOAD_PATH << "test" << "."
     ::MiniTest::Unit.output = stdout
 
@@ -17,7 +17,7 @@ class Spork::TestFramework::MiniTest < Spork::TestFramework
   end
 
   def parse_options(argv)
-    paths, opts = argv.slice_before("--").to_a
+    paths = argv.select { |arg| arg =~ /^\./ }
     paths ||= []
     opts ||= []
     opts.shift
