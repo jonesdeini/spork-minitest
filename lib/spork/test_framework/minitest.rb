@@ -50,6 +50,6 @@ class Spork::TestFramework::MiniTest < Spork::TestFramework
     end
     argv.compact!
 
-    ::MiniTest::Unit.new.run(opts)
+    ::MiniTest::Unit.new.run(argv)
   end
 end
